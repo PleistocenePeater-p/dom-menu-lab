@@ -33,16 +33,18 @@ topMenuEl.setAttribute("style", "height:100%")
 topMenuEl.style.backgroundColor = "var(--top-menu-bg)";
 topMenuEl.classList.add("flex-around");
 
-//Part 2: Task 5.2 - Attach a delegated 'click' event listener to topMenuEl.
+//======Part 2======//
+//Task 5.2 - Attach a delegated 'click' event listener to topMenuEl.
 topMenuEl.addEventListener("click", function(evt){
     evt.preventDefault()
-    let lmnt = evt.target; //https://www.w3schools.com/jsref/event_target.asp
-                            // "Get the element where the event occured: const element = event.target;"
-    if (lmnt.tagName !== "A"){
+    let lmnt = evt.target; 
+//https://www.w3schools.com/jsref/event_target.asp
+// "Get the element where the event occured: const element = event.target;"
+    if (lmnt.tagName !== "A")
         return;
-    }
-    console.log(lmnt.textContent); //https://www.w3schools.com/jsref/prop_node_textcontent.asp
-                                //"Return the text content of an element: let text = element.textContent"
+    console.log(lmnt.textContent); 
+//https://www.w3schools.com/jsref/prop_node_textcontent.asp
+//"Return the text content of an element: let text = element.textContent"
 // Task 5.3
     if (lmnt.classList.contains("active")){
         lmnt.classList.remove("active");
@@ -51,11 +53,63 @@ topMenuEl.addEventListener("click", function(evt){
         return;
     }
 //Task 5.4
-    topMenuLinks.forEach()
-    this.classList.remove()
+    topMenuLinks.forEach(function(lmnt){
+    lmnt.classList.remove("active");
+    });
 
+//Task 5.5
+lmnt.classList.add("active")
+
+//Task 5.6 //peeked
+const lmntData = menuLinks.find(function(lmntObj){
+  return lmntObj.text === lmnt.textContent;
+});
+showingSubMenu = "subLinks" in lmntData;
+
+//Task 5.7
+if (showingSubMenu = true){
+  buildSubMenu(lmntData.subLinks);
+  subMenuEl.style.top = "100%"
+}
+else {
+  subMenuEl.style.top = "0"
+  mainEl.innerHTML = "<h1>about</h1>"
+  }
 });
 
+//Task 5.8
+function buildSubMenu(subLinks){
+  subMenuEl.innerHTML = "";
+  subLinks.forEach(function(lmnt){
+    const linksEl = document.createElement("A")
+    linksEl.setAttribute("href", link.href);
+    linksEl.textContent = link.text;
+    subMenuEl.appendChild(linksEl);
+  });
+}
+
+//Task 6.0
+subMenuEl.addEventListener("click", function(evt){
+  evt.preventDefault()
+  let lmnt = evt.target; 
+  if (lmnt.tagName !== "A"){
+    return;
+  }
+  console.log(lmnt.textContent);
+
+  //Task 6.1
+  showingSubMenu = false;
+  subMenuEl.style.top = "0";
+
+  //Task 6.2
+  topMenuLinks.forEach(function(link){
+    link.classList.remove("active");
+  });
+
+  //Task 6.3
+  mainEl.innerHTML = "<h1>${link.textcontent}</h1>";
+
+});
 
 
 //3 
@@ -86,4 +140,3 @@ menuLinks.forEach(function(link){
 const topMenuLinks = document.querySelectorAll("a")
 
 
-  
